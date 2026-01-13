@@ -29,7 +29,7 @@ with col1:
 with col2:
      with st.container():
         bp = calculate_bond_price(fv, c_rate, maturity, mr)
-        st.metric(label='Bond Price:', value=f'${bp}',width= 'content' )
+        st.metric(label='Bond Price:', value=f'${bp}', width= 'content')
         if bp < fv:
             st.success('Discount')
            
