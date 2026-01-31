@@ -36,10 +36,26 @@ valuation_page = st.Page(
     title= 'Valuation'
 )
 
+portfolio_page = st.Page(
+    page='pages/portfolio.py',
+    title='Porfolio Simulator'
+)
+
+etf_page = st.Page(
+    page= 'pages/etf_tool.py',
+    title='ETF Evaluation Tool'
+)
+
+beta_page = st.Page(
+    page='pages/beta_analysis.py',
+    title='Portfolio Performane Metrics'
+)
+
 nav = st.navigation(
     {
       'Module 1' : [bond_page, inflation_page, short_page, cb_page],
-      'Module 2' : [returns_page, valuation_page , sharpe_page]
+      'Module 2' : [returns_page, valuation_page , sharpe_page],
+      'Module 3' : [portfolio_page, beta_page, etf_page]
     }
 )
 st.sidebar.text('Made by drjollof')
