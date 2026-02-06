@@ -1,5 +1,9 @@
 import streamlit as st
 
+if 'port_val' and 'port_return' not in st.session_state:
+    st.session_state['port_vol'] = 0
+    st.session_state['port_var'] = 0
+    st.session_state['port_return'] = 0
 
 bond_page = st.Page(
     page='pages/bond.py',
