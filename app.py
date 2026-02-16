@@ -1,9 +1,19 @@
 import streamlit as st
+defaults  = {'w_a' : 50,
+             'w_b' : 50,
+             'r_a' : 10,
+             'r_b': 12, 
+             'vol_a' : 20,
+             'vol_b' : 30,
+             'corr' : 0.2,
+             'port_vol' : 0,
+             'port_return': 0,
+             'port_var' : 0
+             }
 
-if 'port_val' and 'port_return' not in st.session_state:
-    st.session_state['port_vol'] = 0
-    st.session_state['port_var'] = 0
-    st.session_state['port_return'] = 0
+for key, value in defaults.items():
+    if key not in st.session_state:
+        st.session_state[key] = value
 
 bond_page = st.Page(
     page='pages/bond.py',

@@ -4,6 +4,17 @@ import math
 
 st.header('Porfolio Simulator & Risk Analysis')
 
+def update_b():
+    st.session_state.w_b = 100 - st.session_state.w_a_slider
+    st.session_state.update({'w_a': st.session_state.w_a_slider})
+
+def sync_state(key):
+    st.session_state[key] = st.session_state[f'{key}_slider']
+
+
+
+
+
 
 def portfolio(w1,w2,v1,v2,r1,r2,corr):
     w1 = w1/100
@@ -23,20 +34,53 @@ col1, col2 = st.columns(2, border=True)
 
 with col1:
     container = st.container(border=False)
-    container.text('Two-asset portfolio construction')
-    weight_a = st.slider('Asset A weight (ωA)')
-    weight_b = st.slider('Asset B weight (ωB)', value= 100 - weight_a)
-    corra_b = st.slider('Correlation',min_value=-1.0, max_value=1.0, step=0.1)
+    container.subheader('Two-asset portfolio construction')
+    container.divider()
+
+    st.slider('Asset A weight (ωA)', value= st.session_state.w_a, 
+              key= 'w_a_slider', on_change= update_b)
+    
+    weight_a = st.session_state.w_a
+    weight_b = st.session_state.w_b
+
+    st.info(f'Asset B weight (ωB) is automatically set to: {weight_b}')
+
+    #st.slider('Asset B weight (ωB)', value= st.session_state.w_b, key= 'w_b_slider', on_change= update_a)
+    st.slider('Correlation', value= st.session_state.corr, 
+              min_value=-1.0,
+               max_value=1.0, step=0.1,
+               on_change= sync_state, args=('corr',),
+               key= 'corr_slider')
+
+    corra_b = st.session_state.corr
+    
 
 with col2:
-    col3, col4 = st.columns(2)
-    with col3:
-        return_a = st.number_input('Return (Ra)')
-        vol_a = st.number_input('Volatility (σA)')
+    
+        st.number_input('Volatility (σA)', value = st.session_state.vol_a,
+                        key= 'vol_a_slider',
+                        on_change= sync_state, args=('vol_a',))
+        
+        st.number_input('Return (rA)',value = st.session_state.r_a,
+                        key= 'r_a_slider',
+                        on_change= sync_state, args=('r_a',))
+        
+        vol_a = st.session_state.vol_a
+        return_a = st.session_state.r_a
+        
 
-    with col4:
-        return_b = st.number_input('Return (B)')
-        vol_b = st.number_input('Volatility (σB)')
+    
+        st.number_input('Return (rB)', value = st.session_state.r_b,
+                        key= 'r_b_slider',
+                        on_change= sync_state, args=('r_b',))
+        
+        st.number_input('Volatility (σB)', value = st.session_state.vol_b,
+                        key= 'vol_b_slider',
+                        on_change= sync_state, args=('vol_b',))
+        
+        return_b = st.session_state.r_b
+        vol_b = st.session_state.vol_b
+        
 
 st.divider()
 
@@ -54,14 +98,16 @@ st.session_state['port_var'] = variance
 
 col5,col6,col7 = st.columns(3, border=True)
 with col5:
-    st.metric('Expected Return (Rp)', f'{p_return: .2f}%')
+    st.metric('Expected Return (rP)', f'{p_return: .2f}%')
 
 with col6:
     st.metric('Portfolio Volatility (σ)', f'{volatility: .2f}%')
 
 with col7:
     st.metric('Interaction Risk Removed', f'{risk_saved: .2f}%')
-    st.metric('Risk Gap', f'{variance_red:.2f}')
+
+container = st.container(border=True)
+container.metric('Risk Gap', f'{variance_red:.2f}')
     
 if corra_b < 0:
     st.info("Negative correlation creates a hedge, allowing assets to cancel out each other's risks")
