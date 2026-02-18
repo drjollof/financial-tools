@@ -65,11 +65,17 @@ beta_page = st.Page(
     title='Portfolio Performane Metrics'
 )
 
+payoff_page = st.Page(
+    page='pages/option_payoff.py',
+    title='Payoff Visualizer'
+)
+
 nav = st.navigation(
     {
       'Module 1' : [bond_page, inflation_page, short_page, cb_page],
       'Module 2' : [returns_page, valuation_page , sharpe_page],
-      'Module 3' : [portfolio_page, beta_page, etf_page]
+      'Module 3' : [portfolio_page, beta_page, etf_page],
+      'Module 4' : [payoff_page]
     }
 )
 st.sidebar.text('Made by drjollof')
