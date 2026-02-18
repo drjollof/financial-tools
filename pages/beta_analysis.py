@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.header('Portfolio Performance & Beta Analysis')
+st.header('Portfolio Performance')
 port_vol = st.session_state['port_vol']
 port_return = st.session_state['port_return']
 port_var = st.session_state['port_var']
@@ -86,7 +86,7 @@ with col5:
     
     else: 
         st.write('Value at Risk: Aggressive')
-        st.error(f'High loss potential. Ther is a 5% chance you could lose more than {VaR:.2f}% in a single period. Ensure you have the stomach for this volatility!')
+        st.error(f'High loss potential. There is a 5% chance you could lose more than {VaR:.2f}% in a single period. Ensure you have the stomach for this volatility!')
 
 
 

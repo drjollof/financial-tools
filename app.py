@@ -70,12 +70,20 @@ payoff_page = st.Page(
     title='Payoff Visualizer'
 )
 
+parity_page = st.Page(
+    page='pages/put_parity.py',
+    title='Put Call Parity'
+)
+
+
+
+
 nav = st.navigation(
     {
       'Module 1' : [bond_page, inflation_page, short_page, cb_page],
       'Module 2' : [returns_page, valuation_page , sharpe_page],
       'Module 3' : [portfolio_page, beta_page, etf_page],
-      'Module 4' : [payoff_page]
+      'Module 4' : [payoff_page, parity_page]
     }
 )
 st.sidebar.text('Made by drjollof')
