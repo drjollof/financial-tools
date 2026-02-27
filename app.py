@@ -75,15 +75,33 @@ parity_page = st.Page(
     title='Put Call Parity'
 )
 
+merton_page = st.Page(
+    page='pages/merton_model.py',
+    title='Merton Model Simulator'
+)
 
+loan_page = st.Page(
+    page='pages/loan.py',
+    title='Loan Evaluator'
+)
 
+mbs_page = st.Page(
+    page='pages/mbs_sim.py',
+    title='MBS Simulator'
+)
+
+credit_page = st.Page(
+    page= 'pages/credit_risk.py',
+    title= 'Credit Risk Engine'
+)
 
 nav = st.navigation(
     {
       'Module 1' : [bond_page, inflation_page, short_page, cb_page],
       'Module 2' : [returns_page, valuation_page , sharpe_page],
       'Module 3' : [portfolio_page, beta_page, etf_page],
-      'Module 4' : [payoff_page, parity_page]
+      'Module 4' : [payoff_page, parity_page, merton_page],
+      'Module 5' : [loan_page, mbs_page, credit_page ]
     }
 )
 st.sidebar.text('Made by drjollof')
