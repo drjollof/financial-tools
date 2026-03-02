@@ -1,6 +1,7 @@
 import streamlit as st
 
-st.title('Loan Underwriting Analysis')
+st.header('Loan Underwriting Simulator')
+st.divider()
 
 def calc_ltv(loan_amount, house_value):
     if house_value <= 0:
@@ -26,16 +27,16 @@ with col1:
     dti = calc_dti(debt, income)
     st.divider()
     if dti >= 50:
-        st.error(f'DTI Ratio: {dti}%')
+        st.error(f'**DTI Ratio: {dti}%**')
 
     elif dti > 43:
-       st.warning(f'DTI Ratio: {dti}%')
+       st.warning(f'**DTI Ratio: {dti}%**')
     
     else:
        st.success(f'**DTI Ratio: {dti}%**') 
 
 with col2:
-    st.write('Collateral (LTV Ratio)')
+    st.write('**Collateral (LTV Ratio)**')
     house_val = st.number_input('House Price ($)', value=500000)
     loan_amt = st.number_input('Loan Amount ($)', value=400000)
     ltv = calc_ltv(loan_amt, house_val)
@@ -43,13 +44,13 @@ with col2:
     st.divider()
 
     if ltv >= 100:
-       st.error(f'LTV Ratio: {ltv:.1f}%')
+       st.error(f'**LTV Ratio: {ltv:.1f}%**')
 
     elif ltv > 80:
-       st.warning(f'LTV Ratio: {ltv:.1f}%')
+       st.warning(f'**LTV Ratio: {ltv:.1f}%**')
 
     else:
-       st.success(f'LTV Ratio: {ltv:.1f}%')
+       st.success(f'**LTV Ratio: {ltv:.1f}%**')
       
 
 

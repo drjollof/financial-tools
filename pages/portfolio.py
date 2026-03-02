@@ -2,7 +2,8 @@ import streamlit as st
 import math
 
 
-st.header('Porfolio Simulator & Risk Analysis')
+st.header('Porfolio & Risk Simulator ')
+st.divider()
 
 def update_b():
     st.session_state.w_b = 100 - st.session_state.w_a_slider

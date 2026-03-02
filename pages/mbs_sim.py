@@ -1,19 +1,33 @@
 import streamlit as st
 
-st.title('MBS Simulator')
+st.header('Mortgage-backed Security Waterfall Simulator')
+st.divider()
 
-col1, col2 = st.columns(2, border=True)
+
+st.subheader('Tranche Pool ($M)')
+container1 = st.container(border=True)
+tps = container1.number_input('**Total Pool Size ($M)**', value= 300)
+
+st.subheader('Tranche Par Values ($M)')
+col1, col2, col3 = st.columns(3, border=True)
+
 
 with col1:
-    tps = st.number_input('Toal Pool Size ($M)', value= 300)
-    tpl = st.slider('Total Pool Loss ($M)',min_value= 0, 
-               max_value=tps,label_visibility='visible')
+    
+    s_t = st.number_input('**Senior (A)**', value=180)
+    
+    
     
 with col2:
-    st.subheader('Tranche Par Values')
-    s_t = st.number_input('Senior (A)', value=180)
-    m_t = st.number_input('Mezzanine (B)', value= 70)
-    e_t = st.number_input('Equity (C)', value= tps - (s_t + m_t) )
+    m_t = st.number_input('**Mezzanine (B)**', value= 70)
+
+with col3:
+    e_t = st.number_input('**Equity (C)**', value= tps - (s_t + m_t) )
+
+container2 = st.container(border=True)
+tpl = container2.slider('**Total Pool Loss ($M)**',min_value= 0, 
+               max_value=tps,label_visibility='visible')
+
 
 def get_loss(total_loss, tranche_a, tranche_b, tranche_c):
     if tranche_c < total_loss:
@@ -52,15 +66,44 @@ st.subheader('Tranche Status')
 
 col3, col4, col5 = st.columns(3, border=True)
 
-with col3:
-    st.write('Equity (Tranche C)')
-    st.write(f'STATUS:{c}')
+with col5:
+    st.write('**Equity (Tranche C)**')
+
+    if c == 0:
+        st.success(f'**STATUS**: Protected \n \n **LOSS:** -${b}M')
+
+    elif c >= e_t:
+        st.error(f'**STATUS: Wiped Out** \n \n **LOSS:** -${c}M')
+
+    else:
+        st.warning(f'**STATUS**: Impaired \n \n **LOSS:** -${c}M')
+    
     
 
 with col4:
-    st.write('Mezzanine (Tranche B)')
-    st.write(f'STATUS:{b}')
+    st.write('**Mezzanine (Tranche B)**')
 
-with col5:
-    st.write('Senior (Tranche A)')
-    st.write(f'STATUS:{a}')
+    if b == 0:
+        st.success(f'**STATUS**: Protected \n \n **LOSS:** -${b}M')
+
+    elif b >= m_t:
+        st.error(f'**STATUS: Wiped Out** \n \n **LOSS:** -${b}M')
+
+    else:
+        st.warning(f'**STATUS**: Impaired \n \n **LOSS:** -${b}M')
+    
+
+
+
+with col3:
+    st.write('**Senior (Tranche A)**')
+
+    if a == 0:
+        st.success(f'**STATUS**: Protected \n \n **LOSS:** -${a}M')
+
+    elif a >= s_t:
+        st.error(f'**STATUS: Wiped Out** \n \n **LOSS:** -${a}M')
+
+    else:
+        st.warning(f'**STATUS**: Impaired \n \n **LOSS:** -${a}M')
+    

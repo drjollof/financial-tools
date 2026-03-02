@@ -17,7 +17,8 @@ def calculate_arb(stock_price , strike_price, risk_free, call_price, time, put_p
     return F_C, P_C, gap
 
 
-st.title('Put-Call Parity (Arbitrage Detector)')
+st.header('**Put-Call Parity (Arbitrage Detector)**')
+st.divider()
 
 col1, col2 = st.columns(2, border= True)
 
@@ -46,7 +47,7 @@ elif round(F_C, 2) < round(P_C, 2) :
 else:    
     container.success('**No Arbitrage Detected!**')
  
-
+st.divider()
 col3, col4, col5 = st.columns(3, border=True)
 
 with col3:

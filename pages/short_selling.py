@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 st.header('Short Position P/L Analysis')
 st.divider()
@@ -42,7 +43,7 @@ with col1:
     else:
         roi = 0
 
-    data = {'Gross Profit' : f'${g_profit:.2f}',
+    data = {'Gross Profit/Loss' : f'${g_profit:.2f}',
              'Financing Cost': f'${financing_cost:.2f}',
              'Income Cost' : f'${income_cost:.2f}'
              }
@@ -50,7 +51,7 @@ with col1:
 with col2:
     st.subheader('Profit/Loss Summary')
     st.divider()
-    st.metric('Net Profit', value= f'${net_profit:.2f}', delta=f'{roi:.2f}%', border=True )
+    st.metric('Net Profit/Loss', value= f'${net_profit:.2f}', delta=f'{roi:.2f}%', border=True )
     st.divider()
     st.subheader('P/L Breakdown')
     st.table(data,)
@@ -60,4 +61,29 @@ with col2:
 
 st.divider()
 
+def get_p(initial_price):
+    a = 0 * initial_price
+    b = 0.5 * initial_price
+    c =  1 * initial_price
+    d = 1.5 * initial_price
+    e = 2 * initial_price
 
+    prices = [a,b,c,d,e]
+    return prices
+
+
+
+prices = get_p(isp)
+net_profit_list = []
+for price in prices:
+    g_profit = gross_profit_fn(isp, price, shares)
+    income_cost , financing_cost, market_value = short_cost_fn(D_p, shares, H_p, isp, F_r )
+    n_p = round(net_profit_fn(g_profit, income_cost, financing_cost), 2)
+    net_profit_list.append(n_p)
+
+data = {'initial_price' : prices,
+        'net_profit' : net_profit_list}
+
+df = pd.DataFrame(data)
+st.table(df)
+#st.line_chart(df, x = 'initial_price', y = 'net_profit' ,use_container_width=True)

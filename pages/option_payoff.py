@@ -69,7 +69,8 @@ def get_metrics(s_current, strike, premium, option_type, position):
     return intrinsic, breakeven, net_pl, max_risk_val, risk_label
 
 # 
-st.title('Option Payoff Visualizer')
+st.header('Option Payoff Visualizer')
+st.divider()
 
 col1, col2, col3 = st.columns(3, border=True)
 
@@ -101,6 +102,7 @@ elif asset_price == s_p:
 else: 
     container.error('**Option is out of the Money**')
 
+st.divider()
 col5,col6,col7,col8 = st.columns(4, border=True)
 
 
