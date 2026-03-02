@@ -20,7 +20,7 @@ def plot_payoff(s_current, strike, premium, option_type, position):
     else: 
         profit = premium - payoff
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(10, 6), dpi = 100)
     ax.plot(s_t, profit, color='#00d4ff', linewidth=2)
     ax.axhline(0, color='white', lw=1, ls='--') 
 
@@ -69,7 +69,8 @@ def get_metrics(s_current, strike, premium, option_type, position):
     return intrinsic, breakeven, net_pl, max_risk_val, risk_label
 
 # 
-st.title('Option Payoff Visualizer')
+st.header('Option Payoff Visualizer')
+st.divider()
 
 col1, col2, col3 = st.columns(3, border=True)
 
@@ -95,29 +96,30 @@ container.pyplot(plot_payoff(asset_price, s_p, premium, op_type, pos))
 iv, bp, net, mrv, rl= get_metrics(asset_price, s_p, premium, op_type, pos)
     
 if asset_price > s_p:
-    container.success('Option is in the money')
+    container.success('**Option is in the money**')
 elif asset_price == s_p:
-    container.info('Option is at the money')
+    container.info('**Option is at the money**')
 else: 
-    container.error('Option is out of the Money')
+    container.error('**Option is out of the Money**')
 
+st.divider()
 col5,col6,col7,col8 = st.columns(4, border=True)
 
 
 
 with col5:
-    st.metric('Intrinsic Value', f'${iv:.2f}')
+    st.metric('**Intrinsic Value**', f'${iv:.2f}')
 
 with col6:
-    st.metric('Breakeven Point', f'${bp:.2f}')
+    st.metric('**Breakeven Point**', f'${bp:.2f}')
 
 with col7:
-    st.metric('Net P/L', f'${net:.2f}')
+    st.metric('**Net P/L**', f'${net:.2f}')
 
 with col8:
     if isinstance(mrv, str):
-        st.metric('Mx Risk', f'{mrv}')
+        st.metric('**Max Risk**', f'{mrv}')
         st.text(rl)
     else:
-        st.metric('Mx Risk', f'${mrv:.1f}')
+        st.metric('**Max Risk**', f'${mrv:.1f}')
         st.text(rl)
