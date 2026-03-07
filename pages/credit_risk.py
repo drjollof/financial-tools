@@ -29,7 +29,7 @@ st.divider()
 col7, col8 = st.columns(2, border=True)
 
 with col7:
-    st.slider('Corporate Bonnd Yield (%)')
+    st.slider('Corporate Bond Yield (%)')
     st.slider('Government Bond Yield (%)')
 
 with col8:

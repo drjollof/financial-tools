@@ -95,13 +95,29 @@ credit_page = st.Page(
     title= 'Credit Risk Engine'
 )
 
+leverage_page = st.Page(
+    page= 'pages/leverage.py',
+    title='Leverage and Development'
+)
+
+equity_page = st.Page(
+    page='pages/equity.py',
+    title= 'Equity Research'
+)
+
+ta_page = st.Page(
+    page= 'pages/ta.py',
+    title='Technical Analysis'
+)
+
 nav = st.navigation(
     {
       'Module 1' : [bond_page, inflation_page, short_page, cb_page],
       'Module 2' : [returns_page, valuation_page , sharpe_page],
       'Module 3' : [portfolio_page, beta_page, etf_page],
       'Module 4' : [payoff_page, parity_page, merton_page],
-      'Module 5' : [loan_page, mbs_page, credit_page ]
+      'Module 5' : [loan_page, mbs_page, credit_page ],
+      'Module 6' : [leverage_page, equity_page, ta_page]
     }
 )
 st.sidebar.text('Made by drjollof')
