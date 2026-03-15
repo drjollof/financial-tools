@@ -42,7 +42,7 @@ with col1:
                            help='The fixed annual payment the bond pays'
                            )
 
-        maturity = st.slider('**Years to Maturity TM (years)**',
+        maturity = st.slider('**Years to Maturity (years)**',
                              value=2,
                              help='the number of years left until bond issuer pays back the full par value'
                              )
@@ -150,7 +150,7 @@ with res_col1:
 with res_col2:
         st.metric(
             label="Linear Price Change", 
-            value=f"${foa:.2f}", 
+            value=f"{'-' if foa < 0 else ''}${abs(foa):,.2f}",
             help=" The first-order approximation (assumes a straight line)."
         )
 
@@ -158,7 +158,7 @@ with res_col2:
 with res_col3:
         st.metric(
             label="True Price Change", 
-            value=f"${soa:.2f}", 
+            value=f"{'-' if soa < 0 else ''}${abs(soa):.2f}", 
             help="The second-order approximation accounting for curvature."
         )
         
