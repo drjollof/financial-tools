@@ -52,4 +52,13 @@ if is_stale:
     container3 = st.container(border=True)
     container3.warning("**Stale Price Alert** \n\n "
     "if underlying asset prices are stale, the calculated NAV is a 'lagging' indicator. Traders may exploit this difference through arbitrage ")
-        
+
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

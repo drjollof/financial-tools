@@ -2,8 +2,16 @@ import streamlit as st
 
 
 st.title("Fractional Reserve Banking Simulator")
+
+st.markdown("""
+*Simulate deposits multiplier effect and how credit is created through systemic lending. 
+            Use the Stress Test to determine if the bank’s physical liquidity can survive a sudden digital bank run.*
+""")
+
+
 st.caption(f"*Calculations assume a closed banking system where all lent money is re-deposited.*")
 
+st.divider()
 
 
 def get_metrics(reserve_ratio, initial_deposit, interest_margin):
@@ -26,19 +34,23 @@ def get_stress_test(withdrawal_percent, total_system_deposits):
     return withdrawal_amount
     
 
-st.subheader("Bank Parameters")
-col1, col2, col3 = st.columns(3 , border=True)
+
+container0 = st.container(border=True)
+
+container0.subheader("Bank Parameters")
+
+col1, col2, col3 = container0.columns(3 , border=True)
 
 with col1:
-    initial_deposit = st.number_input("Initial Deposit ($)", 
+    initial_deposit = st.number_input("**Initial Deposit ($)**", 
                                       value=10000, 
                                       )
 with col2:
-    reserve_ratio = st.slider("Reserve Ratio (%)",
+    reserve_ratio = st.slider("**Reserve Ratio (%)**",
                                1, 50, 10,
                                  help="The % of deposits the bank must keep in the vault.")
 with col3:
-    interest_margin = st.slider("Interest Margin (%)", 
+    interest_margin = st.slider("**Interest Margin (%)**", 
                                 0.5, 10.0, 4.0, 
                                 help="The profit gap between loan rates and deposit rates.")
 
@@ -49,15 +61,18 @@ st.write("---")
 m1, m2, m3 = st.columns(3, border=True)
 
 
-m1.metric("Total System Deposits",
+m1.metric("**Total System Deposits**",
            value= f"${total_system_deposits:,.0f}",
-           help=f"Money Multiplier: {multiplier:.0f}x")
+           help=f"""The aggregate value of all digital account balances generated through the lending cycle. 
+           This value represents the total credit supply in the system.     
 
-m2.metric("Bank Annual Profit",
+             Money Multiplier: {multiplier:.0f}x""")
+
+m2.metric("**Bank Annual Profit**",
           value=  f"${annual_profit:,.0f}",
             help="Estimated income from re-lending deposits.")
 
-m3.metric("Liquidity Buffer", 
+m3.metric("**Liquidity Buffer**", 
           value= f"${initial_deposit:,.0f}",
            
             help="The actual cash available for withdrawals.")
@@ -73,7 +88,14 @@ container2 = st.container(border=True)
 col4 = st.columns(1, border=True)
 
 withdrawal_percent = container1.slider(" **Percentage Withdrawal (%)** ",
-                                    help="What % of customers want their cash back at the same time?")
+                                    help=f"""
+    The proportion of total account balances customers attempt to withdraw at once. 
+    
+    In a fractional reserve system, the bank is insolvent if the withdrawal amount 
+    exceeds the physical cash in the vault. 
+    
+    Current Failure Point: > {reserve_ratio}% withdrawal demand.
+    """)
 
 
 withdrawal_amount = get_stress_test(withdrawal_percent, total_system_deposits)
@@ -85,10 +107,14 @@ if withdrawal_amount <= initial_deposit:
 
 else:
     container2.error("**INSOLVENT** \n\n  **Withdrawals exceed available cash** ")
-    st.divider()
     container2.warning("**LIQUIDITY CRISIS** \n\n **You would need an emergency loan from the Central Bank** ")
 
 
 
 
 
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

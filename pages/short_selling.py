@@ -1,7 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-st.header('Short Selling Analysis')
+st.title('Short Selling Analysis')
+
+st.markdown("""
+*Simulate profits from falling market prices by tracking the short selling cycle.
+             Monitor financing fees and dividend obligations while watching the Margin Call price to manage unlimited risk*
+""")
+
 st.divider()
 
 def gross_profit_fn(initial_price, cover_price, n_shares):
@@ -117,7 +123,7 @@ with col_left:
                                   value= 30,
                                   help="Minimum safety level before a Margin Call.")
 
-st.write('---')
+
 
 with col_right:
 
@@ -144,3 +150,13 @@ with col_right:
 
     else:
         st.success(f" **Position is currently stable. You have a ${price_gap:,.2f} safety buffer** ")
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")
+

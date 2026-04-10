@@ -11,7 +11,12 @@ def get_metrics(asset_return, volatility, risk_free):
     return sharpe , premium
 
 
-st.header('Risk-Adjusted Performance (Sharpe Ratio)')
+st.title('Sharpe Ratio')
+
+st.markdown("""
+*Evaluate risk-adjusted performance by measuring expected returns against a risk-free benchmark to determine if you are being fairly compensated for market volatility.*
+""")
+
 st.divider()
 
 container0 = st.container(border=True)
@@ -82,3 +87,12 @@ else:
     container2.info(" **You are not earning anything above what you could have made from a 'safe' investment** ")
 
     
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

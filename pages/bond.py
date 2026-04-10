@@ -1,6 +1,13 @@
 import streamlit as st
 
-st.header('Bond Pricing')
+
+st.title('Bond Pricing and Sensitivity')
+
+
+st.markdown("""
+*Determine the market value of a bond based on current interest rates and maturity. 
+            Use Duration and Convexity metrics to measure how sensitive  bond’s price is to interest rate changes*
+""")
 
 def get_bond_price(face_value, coupon_rate, years_to_maturity, market_rate):
     coupon_payment = face_value * coupon_rate/100
@@ -26,6 +33,10 @@ def get_bond_sensitivity(mod_duration, dr, dollar_duration, convexity):
 
 
 st.divider()
+
+st.subheader('Bond Pricing')
+
+st.write('---')
 
 col1,col2 = st.columns(2, border=True)
 
@@ -65,7 +76,7 @@ with col2:
                           help='Current worth of the bond ')
 
         if bp < fv:
-            container2.success('** Trading at Discount**')
+            container2.success('**Trading at Discount**')
            
         else:
             container2.warning('**Trading at a Premium**')
@@ -78,7 +89,7 @@ with col2:
 st.divider()
 
 
-st.header('Interest Rate Sensitivity')
+st.subheader('Interest Rate Sensitivity')
 st.divider()
 
 col3, col4, col5 = st.columns(3, border=True)
@@ -183,3 +194,11 @@ elif dr < 0:
 
 else:
         st.info("**Rates stayed the same.** \n\n bond price hasn't moved based on interest rates.")
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

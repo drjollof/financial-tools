@@ -114,3 +114,13 @@ container.metric('**Risk Gap**', f'{variance_red:.2f}')
 if corra_b < 0:
     st.info("**Negative correlation creates a hedge, allowing assets to cancel out each other's risks**")
 
+
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

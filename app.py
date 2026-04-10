@@ -17,7 +17,7 @@ for key, value in defaults.items():
 
 bond_page = st.Page(
     page='pages/bond.py',
-    title='Bond Price Calculator',
+    title='Bond Pricing',
     default=True
 )
 
@@ -32,7 +32,7 @@ short_page = st.Page(
 
 cb_page = st.Page(
     page= 'pages/central_bank.py',
-    title='CBR'
+    title='Central Bank Reserve'
 )
 
 returns_page = st.Page(
@@ -47,7 +47,7 @@ sharpe_page = st.Page(
 
 valuation_page = st.Page(
     page= 'pages/valuation_models.py',
-    title= 'Valuation'
+    title= 'Valuation models'
 )
 
 portfolio_page = st.Page(
@@ -57,12 +57,12 @@ portfolio_page = st.Page(
 
 etf_page = st.Page(
     page= 'pages/etf_tool.py',
-    title='ETF Evaluation Tool'
+    title='ETF Evaluation'
 )
 
 beta_page = st.Page(
     page='pages/beta_analysis.py',
-    title='Portfolio Performane Metrics'
+    title='Portfolio Performane'
 )
 
 payoff_page = st.Page(

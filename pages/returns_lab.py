@@ -17,7 +17,12 @@ def get_metrics(initial_price,final_price, dividend , is_dividend = False):
 
 
 
-st.header('Returns and Performance')
+st.title('Returns and Performance')
+
+st.markdown("""
+*Calculate and compare asset performance using arithmetic and logarithmic returns and understand the impact of dividends on total return.*
+""")
+
 st.divider()
 
 col1, col2 = st.columns(2, border=True)
@@ -64,3 +69,15 @@ with col5:
   st.metric('**Dividend Yield**',
              f'{dividend_yield:.2f}%',
              help='The income-generating efficiency of the asset. Shows how much cash received relative to the price paid.')
+  
+
+
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")
