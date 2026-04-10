@@ -21,11 +21,21 @@ def net_profit_fn(gross_profit, finacing_cost, income_cost):
 
 
 def margin_call(initial_price, initial_margin_pct,maint_margin_pct):
-    margin_call_price = initial_price * ((1 + initial_margin_pct/100) / (1 + maint_margin_pct/100))
-    
-    
-    gross_pl = (initial_price - current_price) * shares
-    percent_pl = (gross_pl / (initial_price * shares * (initial_margin_pct/100))) * 100
+
+    if initial_margin_pct > 0:
+
+
+
+        margin_call_price = initial_price * ((1 + initial_margin_pct/100) / (1 + maint_margin_pct/100))
+        
+        
+        gross_pl = (initial_price - current_price) * shares
+        percent_pl = (gross_pl / (initial_price * shares * (initial_margin_pct/100))) * 100
+
+    else:
+        margin_call_price = 0
+        gross_pl = 0
+        percent_pl = 0
 
     return margin_call_price, gross_pl, percent_pl
 
@@ -126,11 +136,11 @@ with col_right:
     st.write('---')
     
     if current_price >= margin_price:
-        st.error("MARGIN CALL TRIGGERED: Your position is being liquidated.")
+        st.error(" **MARGIN CALL TRIGGERED: Your position is being liquidated** ")
 
     elif price_gap < (initial_short_price * 0.05):
 
-        st.warning(f"CRITICAL: You are only ${price_gap:,.2f} away from a Margin Call!")
+        st.warning(f" **CRITICAL: You are only ${price_gap:,.2f} away from a Margin Call!** ")
 
     else:
-        st.success(f"Position is currently stable. You have a ${price_gap:,.2f} safety buffer.")
+        st.success(f" **Position is currently stable. You have a ${price_gap:,.2f} safety buffer** ")
