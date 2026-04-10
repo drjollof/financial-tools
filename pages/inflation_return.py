@@ -1,5 +1,13 @@
 import streamlit as st
 
+st.title('Inflation & Real Returns')
+
+st.markdown("""
+*Calculate the true growth of your wealth by adjusting nominal gains for inflation. 
+            Use this to see the actual purchasing power of deposits after accounting for inflation.*
+""")
+
+
 
 def calc_metrics(initial_deposit, nominal_rate, inflation_rate, time):
     p_inf = inflation_rate/100
@@ -27,7 +35,7 @@ def calc_metrics(initial_deposit, nominal_rate, inflation_rate, time):
     
     return nominal_profit, inflation_loss, net_real_gain, real_rate_of_return * 100, p0_loss, p1_loss, purchasing_power
 
-st.header('Inflation & Real Returns')
+
 st.divider()
 
 col1 , col2 = st.columns(2, border= True)
@@ -94,3 +102,17 @@ if p_1 < 0:
 
 else:
   container.info(f'At a moderate {ir}% inflation rate, a ${id:,.0f} deposit left idle for {t} years without {nir}% interest rate would lose about {p_0:.2f}% of its value. \n\n While  the same deposit with {nir}% interest rate would gain about {abs(p_1):.2f}% of its value. ')
+
+
+
+
+
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

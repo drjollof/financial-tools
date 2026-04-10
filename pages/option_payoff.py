@@ -123,3 +123,12 @@ with col8:
     else:
         st.metric('**Max Risk**', f'${mrv:.1f}')
         st.text(rl)
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

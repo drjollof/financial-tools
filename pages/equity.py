@@ -68,3 +68,14 @@ elif 1.0 <=  peg <= 1.3:
 else:
      container.error('**Potentially Overvalued** \n\n'
               'You are paying a high price relative to projected growth')
+     
+
+
+
+
+
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")

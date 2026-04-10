@@ -90,5 +90,13 @@ with col2:
               delta_color='normal',
               help=f'with {margin_pct}% margin')
     
-st.divider()
-st.caption("Leverage & Development Lab. Compare homeowner leverage vs developer break-even. Values are illustrative")
+
+
+
+    
+    
+st.markdown("---")
+st.caption("""
+**Disclaimer:** This application is strictly for **educational purposes only**. 
+The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
+""")
