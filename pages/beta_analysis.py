@@ -1,6 +1,11 @@
 import streamlit as st
 
-st.header('Portfolio Performance')
+st.title('Portfolio Performance')
+
+st.markdown("""
+*Audit the custom portfolio's efficiency using risk-adjusted metrics. Evaluate return-to-risk payoff through the Sharpe Ratio and CV, and assess maximum expected downside using Value at Risk (VaR).*
+""")
+
 st.divider()
 
 port_vol = st.session_state['port_vol']
@@ -95,6 +100,6 @@ with col5:
 
 st.markdown("---")
 st.caption("""
-**Disclaimer:** This application is strictly for **educational purposes only**. 
+This application is strictly for **educational purposes only**. 
 The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
 """)
