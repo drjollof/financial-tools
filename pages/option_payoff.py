@@ -63,31 +63,35 @@ def get_metrics(s_current, strike, premium, option_type, position):
         max_risk_val = 'UNLIMITED'
         risk_label = 'Potential for Catastrophic Loss'
     else:
-        max_risk_val = -(strike -premium) * 100
+        max_risk_val = -(strike - premium) * 100
         risk_label =  'Strike - Premium'
 
     return intrinsic, breakeven, net_pl, max_risk_val, risk_label
 
 # 
-st.header('Option Payoff Visualizer')
+st.title('Option Payoff Visualizer')
+
+st.markdown(""" 
+*Visualize the profit and loss profiles of call and put options using "Hockey Stick" payoff. Evaluate risk-reward scenarios where buyer losses are capped at the premium, a key concept for managing trade volatility* """
+)
 st.divider()
 
 col1, col2, col3 = st.columns(3, border=True)
 
 with col1:
     st.subheader('Assets')
-    asset_price = st.number_input('Stock Price ($)')
-    s_p = st.number_input('Strike Price ($)')
+    asset_price = st.number_input('**Stock Price ($)**')
+    s_p = st.number_input('**Strike Price ($)**')
 
 
 with col2:
     st.subheader('Contract Type')
-    op_type = st.selectbox('Option Type', options=['Call', 'Put'])
-    pos = st.selectbox('Position', ['Long', 'Short'])
+    op_type = st.selectbox('**Option Type**', options=['Call', 'Put'])
+    pos = st.selectbox('**Position**', ['Long', 'Short'])
 
 with col3:
     st.subheader('Premium Paid')
-    premium = st.number_input('Premium ($)')
+    premium = st.number_input('**Premium ($)**')
 
 container = st.container(border=True)
 
@@ -129,6 +133,6 @@ with col8:
 
 st.markdown("---")
 st.caption("""
-**Disclaimer:** This application is strictly for **educational purposes only**. 
+This application is strictly for **educational purposes only**. 
 The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
 """)

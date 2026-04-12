@@ -17,23 +17,29 @@ def calculate_arb(stock_price , strike_price, risk_free, call_price, time, put_p
     return F_C, P_C, gap
 
 
-st.header('**Put-Call Parity (Arbitrage Detector)**')
+st.title('**Put-Call Parity (Arbitrage Detector)**')
+
+st.markdown("""
+*Detect market mispricing by applying the law of equilibrium between identical portfolios. 
+Compare the Fiduciary Call and Protective Put to identify arbitrage alerts when assets are incorrectly priced relative to the risk-free rate*
+""")
+
 st.divider()
 
 col1, col2 = st.columns(2, border= True)
 
 with col1:
     st.subheader('Market Data')
-    stock_p = st.number_input('Stock Price ($)')
-    t = st.number_input('Time to Expiry (days)', max_value=1460)
-    rf = st.slider('Risk Free Rate (%)')
+    stock_p = st.number_input('**Stock Price ($)**')
+    t = st.number_input('**Time to Expiry (days)**', max_value=1460)
+    rf = st.slider('**Risk Free Rate (%)**')
     
 
 with col2:
     st.subheader('Option Data')
-    c_p = st.number_input('Call Price ($)')
-    p_p = st.number_input('Put Price ($)')
-    strike_p = st.number_input('Strike Price ($)')
+    c_p = st.number_input('**Call Price ($)**')
+    p_p = st.number_input('**Put Price ($)**')
+    strike_p = st.number_input('**Strike Price ($)**')
 
 container = st.container(border=True)
 
@@ -67,6 +73,6 @@ with col5:
 
 st.markdown("---")
 st.caption("""
-**Disclaimer:** This application is strictly for **educational purposes only**. 
+This application is strictly for **educational purposes only**. 
 The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
 """)

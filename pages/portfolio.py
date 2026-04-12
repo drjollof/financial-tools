@@ -2,7 +2,13 @@ import streamlit as st
 import math
 
 
-st.header('Porfolio & Risk Simulator ')
+
+st.title("Portfolio Simulator")
+
+st.markdown("""
+*Design a custom two-asset portfolio by defining capital allocations, expected returns, and volatilities. Use this tool to demonstrate how correlation drives diversification and actively creates Risk Gap.*
+""")
+
 st.divider()
 
 def update_b():
@@ -39,7 +45,10 @@ with col1:
     container.divider()
 
     st.slider('**Asset A weight (ωA)**', value= st.session_state.w_a, 
-              key= 'w_a_slider', on_change= update_b)
+              key= 'w_a_slider', on_change= update_b,
+              help='''The percentage of total capital allocated to asset A. 
+              In a two-asset portfolio, both assets will always automatically balance to equal 100%.
+              ''')
     
     weight_a = st.session_state.w_a
     weight_b = st.session_state.w_b
@@ -52,7 +61,10 @@ with col1:
               min_value=-1.0,
                max_value=1.0, step=0.1,
                on_change= sync_state, args=('corr',),
-               key= 'corr_slider')
+               key= 'corr_slider',
+               help=''' How these two assets move together. 
+               A +1.0 means they move in same direction, 0 means no relationship, and negative numbers mean they move in opposite directions.
+               ''')
 
     corra_b = st.session_state.corr
     
@@ -61,7 +73,8 @@ with col2:
     
         st.number_input('**Volatility (σA)**', value = st.session_state.vol_a,
                         key= 'vol_a_slider',
-                        on_change= sync_state, args=('vol_a',))
+                        on_change= sync_state, args=('vol_a',),
+                        help= "How wildly the asset A price swings")
         
         st.number_input('**Return (rA)**',value = st.session_state.r_a,
                         key= 'r_a_slider',
@@ -78,7 +91,8 @@ with col2:
         
         st.number_input('**Volatility (σB)**', value = st.session_state.vol_b,
                         key= 'vol_b_slider',
-                        on_change= sync_state, args=('vol_b',))
+                        on_change= sync_state, args=('vol_b',),
+                        help='How wildly the asset B price swings')
         
         return_b = st.session_state.r_b
         vol_b = st.session_state.vol_b
@@ -100,17 +114,20 @@ st.session_state['port_var'] = variance
 
 col5,col6,col7 = st.columns(3, border=True)
 with col5:
-    st.metric('**Expected Return (rP)**', f'{p_return: .2f}%')
+    st.metric('**Expected Return (rP)**', f'{p_return: .2f}%',
+              help='Expected return of the portfolio')
 
 with col6:
-    st.metric('**Portfolio Volatility (σ)**', f'{volatility: .2f}%')
+    st.metric('**Portfolio Volatility (σ)**', f'{volatility: .2f}%',
+              help='Aggregate volatility of both assets in the portfolio')
 
 with col7:
-    st.metric('**Interaction Risk Removed**', f'{risk_saved: .2f}%')
+    st.metric('**Interaction Risk Removed**', f'{risk_saved: .2f}%',
+              help='The percentage of unnecessary volatility successfully neutralized. ')
 
 container = st.container(border=True)
-container.metric('**Risk Gap**', f'{variance_red:.2f}')
-    
+container.metric('**Risk Gap**', f'{variance_red:.2f}',
+                 help= 'The absolute mathematical reduction in portfolio variance.')
 if corra_b < 0:
     st.info("**Negative correlation creates a hedge, allowing assets to cancel out each other's risks**")
 
@@ -121,6 +138,6 @@ if corra_b < 0:
 
 st.markdown("---")
 st.caption("""
-**Disclaimer:** This application is strictly for **educational purposes only**. 
+ This application is strictly for **educational purposes only**. 
 The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
 """)

@@ -9,7 +9,15 @@ def get_nav(assets, liabilities, shares):
 
 
 
-st.header('ETF Net Asset Value (NAV) Calculator')
+st.title('ETF Net Asset Value (NAV)')
+
+st.markdown("""
+*Calculate per-share book value of an etf based on its current market assets and total obligations. Simulate data integrity with the Stale Price check to identify 'lagging' indicators and potential arbitrage risks.*
+""")
+
+st.divider()
+
+
 container = st.container(border=True)
 
 col1, col2 = container.columns(2, border=True)
@@ -34,7 +42,7 @@ shares = container.number_input('**Total Shares Outstanding**',
     
 
 
-is_stale = container.checkbox('**Check for Stale Pricing?**',
+is_stale = container.checkbox('**Check for Stale Pricing**',
                               help='Warns users that the NAV might be lagging behind real-time market conditions')
 
 st.write('---')
@@ -59,6 +67,6 @@ if is_stale:
 
 st.markdown("---")
 st.caption("""
-**Disclaimer:** This application is strictly for **educational purposes only**. 
+This application is strictly for **educational purposes only**. 
 The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
 """)

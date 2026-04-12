@@ -62,7 +62,7 @@ etf_page = st.Page(
 
 beta_page = st.Page(
     page='pages/beta_analysis.py',
-    title='Portfolio Performane'
+    title='Portfolio Performance'
 )
 
 payoff_page = st.Page(

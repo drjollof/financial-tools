@@ -3,8 +3,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-st.title('Merton Model Simulator (Credit Risk & Default)')
+st.title('Merton Model Simulator')
 
+st.markdown("""
+*Evaluate credit risk and housing debt by treating equity as a call option on underlying property assets. 
+Simulate Default Zones in non-recourse loans to determine when a borrower might rationally choose to walk away from debt in a volatile market*
+""")
+st.divider()
 
 def plot_merton_model(asset_value, debt_value, volatility, time_to_expiry):
    
@@ -36,8 +41,7 @@ def plot_merton_model(asset_value, debt_value, volatility, time_to_expiry):
     ax.set_facecolor('#0e1117')
     ax.tick_params(colors='white')
 
-    #ax.spines['bottom'].set_color('white')
-    #ax.spines['left'].set_color('white')
+   
 
     ax.set_xlabel("Time (Years)", color='white')
     ax.set_ylabel("Value ($)", color='white')
@@ -48,13 +52,13 @@ def plot_merton_model(asset_value, debt_value, volatility, time_to_expiry):
 col1, col2 = st.columns(2, border=True)
 
 with col1:
-    a_v = st.number_input('Home/Asset Value ($)', value=0)
-    d_v = st.number_input('Mortgage/Debt Value ($)', value = 0)
-    #r_f =st.slider('Risk-Free Rate (%)')
+    a_v = st.number_input('**Home/Asset Value ($)**', value=0)
+    d_v = st.number_input('**Mortgage/Debt Value ($)**', value = 0)
+    
 
 with col2:
-    t = st.number_input('Time to Expiry (years)', value= 0)
-    vol = st.slider('Volatility (%)', min_value=0.0, 
+    t = st.number_input('**Time to Expiry (years)**', value= 0)
+    vol = st.slider('**Volatility (%)**', min_value=0.0, 
                     max_value=50.0,
                     value=20.0,
                     step=1.0)
@@ -118,6 +122,6 @@ st.table(pd.DataFrame(glossary_data))
 
 st.markdown("---")
 st.caption("""
-**Disclaimer:** This application is strictly for **educational purposes only**. 
+This application is strictly for **educational purposes only**. 
 The calculations and data provided do not constitute professional financial advice or a real-world financial tool. 
 """)
