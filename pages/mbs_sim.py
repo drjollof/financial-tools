@@ -1,32 +1,46 @@
 import streamlit as st
 
-st.header('Mortgage-backed Security Waterfall Simulator')
+st.title('Mortgage-backed Security Waterfall Simulator')
+
+st.markdown("""
+*Simulate credit and risk transfer within mortgage-backed securities.
+             Test how a securitized mortgage pool absorbs credit losses from the bottom up*
+""")
+
 st.divider()
 
 
 st.subheader('Tranche Pool ($M)')
 container1 = st.container(border=True)
-tps = container1.number_input('**Total Pool Size ($M)**', value= 300)
+tps = container1.number_input('**Total Pool Size ($M)**',
+                               value= 300,
+                                 help='The combined dollar value of all the individual mortgages bundled together into the security')
 
-st.subheader('Tranche Par Values ($M)')
+st.subheader('Tranche Par Values ($M)', help="The size of each investor bucket. Adjusting these sizes shows how much protection the safest investors get.")
 col1, col2, col3 = st.columns(3, border=True)
 
 
 with col1:
     
-    s_t = st.number_input('**Senior (A)**', value=180)
+    s_t = st.number_input('**Senior (A)**',
+                           value=180,
+                           help="The safest tranche, usually AAA-rated. It is heavily protected by the lower tranches and only takes a loss during severe market crashes.")
     
     
     
 with col2:
-    m_t = st.number_input('**Mezzanine (B)**', value= 70)
+    m_t = st.number_input('**Mezzanine (B)**',
+                           value= 70,
+                           help="The middle tranche. It acts as a secondary buffer and only starts losing money after the Equity tranche is completely destroyed.")
 
 with col3:
-    e_t = st.number_input('**Equity (C)**', value= tps - (s_t + m_t) )
+    e_t = st.number_input('**Equity (C)**',
+                           value= tps - (s_t + m_t),
+                             help="The riskiest tranche. This tranche absorbs the very first dollar of loss. It offers the highest yield but is the most likely to be wiped out." )
 
 container2 = st.container(border=True)
 tpl = container2.slider('**Total Pool Loss ($M)**',min_value= 0, 
-               max_value=tps,label_visibility='visible')
+               max_value=tps,label_visibility='visible', help="A stress-test slider to simulate defaults. Moving this mimics what happens to the security if a portion of the homeowners in the pool stop paying their mortgages.")
 
 
 def get_loss(total_loss, tranche_a, tranche_b, tranche_c):

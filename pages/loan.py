@@ -1,6 +1,12 @@
 import streamlit as st
 
-st.header('Loan Underwriting Simulator')
+st.title('Loan Underwriting Simulator')
+
+st.markdown("""
+*Evaluate individual borrower creditworthiness for mortgage. 
+            Use Loan-to-Value (LTV) and Debt-to-Income (DTI) ratios to assess financial capacity, collateral strength, and baseline default risk before funding*
+""")
+
 st.divider()
 
 def calc_ltv(loan_amount, house_value):
@@ -20,9 +26,15 @@ def calc_dti(monthly_debt, monthly_income):
 col1 , col2 = st.columns(2, border=True)
 
 with col1:
-    st.write('**Capacity (DTI Ratio)**')
-    income = st.number_input('Monthly Gross Income ($)', value= 6000)
-    debt = st.number_input('Total Monthly Debt Payments ($)',value=2400)
+    st.subheader('**Capacity (DTI Ratio)**')
+    st.divider()
+    income = st.number_input('**Monthly Gross Income ($)**', 
+                             value= 6000,
+                               help="The borrower's total income before taxes and any other deductions are taken out.")
+    
+    debt = st.number_input('**Total Monthly Debt Payments ($)**',
+                           value=2400,
+                             help="All of the borrower's existing monthly debt (car loans, credit cards) plus the proposed new mortgage payment.")
 
     dti = calc_dti(debt, income)
     st.divider()
@@ -36,9 +48,16 @@ with col1:
        st.success(f'**DTI Ratio: {dti}%**') 
 
 with col2:
-    st.write('**Collateral (LTV Ratio)**')
-    house_val = st.number_input('House Price ($)', value=500000)
-    loan_amt = st.number_input('Loan Amount ($)', value=400000)
+    st.subheader('**Collateral (LTV Ratio)**')
+    st.divider()
+    house_val = st.number_input('**House Price ($)**',
+                                 value=500000,
+                                   help='The current market value of the property')
+    
+    loan_amt = st.number_input('**Loan Amount ($)**',
+                                value=400000,
+                                  help='The total amount of money the borrower is asking the bank to lend them')
+    
     ltv = calc_ltv(loan_amt, house_val)
 
     st.divider()
@@ -54,7 +73,7 @@ with col2:
       
 
 
-st.header("Final Underwriting Decision")
+st.subheader("Final Underwriting Decision")
 
 
 if dti < 43 and ltv <= 80:

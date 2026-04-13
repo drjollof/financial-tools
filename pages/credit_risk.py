@@ -10,9 +10,12 @@ def calc_implied(ytm, rf, arr ):
     ipd = cs/lgd
     return cs, ipd
 
-st.header('Expected Loss Calculator' , 
-          help='calculates the amount the bank expects to lose on a specific loan')
-st.caption('Projected loss for specific bank loans.')
+st.header('Expected Loss Calculator')
+
+
+st.markdown("""
+*Calculate the amount the bank expects to lose on a specific loan. This is the projected loss for specific bank loans*
+""")
 
 st.divider()
 
@@ -44,11 +47,12 @@ with col4:
 
 st.divider()
 
-st.header('Implied Probability of Default', 
-          help='calculates the chance of bankruptcy based on what public bond investors are charging at the moment')
-st.caption('Default risk from from public bond spreads')
+st.header('Implied Probability of Default')
 
-
+st.markdown("""
+*Calculate the chance of bankruptcy based on what public bond investors are charging at the moment. This is the Default risk from public bond spreads*
+""")
+st.divider()
 
 col7, col8 = st.columns(2, border=True)
 

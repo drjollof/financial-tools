@@ -30,16 +30,16 @@ col1, col2 = st.columns(2, border= True)
 
 with col1:
     st.subheader('Market Data')
-    stock_p = st.number_input('**Stock Price ($)**')
-    t = st.number_input('**Time to Expiry (days)**', max_value=1460)
-    rf = st.slider('**Risk Free Rate (%)**')
+    stock_p = st.number_input('**Stock Price ($)**', help='The current market price of the asset')
+    t = st.number_input('**Time to Expiry (days)**', max_value=1460, help='The duration remaining until the contract ends')
+    rf = st.slider('**Risk Free Rate (%)**', help='The theoretical return on a safe investment like a government bond.')
     
 
 with col2:
     st.subheader('Option Data')
-    c_p = st.number_input('**Call Price ($)**')
-    p_p = st.number_input('**Put Price ($)**')
-    strike_p = st.number_input('**Strike Price ($)**')
+    c_p = st.number_input('**Call Price ($)**', help='The current market price of the call option')
+    p_p = st.number_input('**Put Price ($)**', help='The current market price of the put option')
+    strike_p = st.number_input('**Strike Price ($)**', help='The shared exercise price used to compare the call and the put')
 
 container = st.container(border=True)
 
@@ -57,13 +57,13 @@ st.divider()
 col3, col4, col5 = st.columns(3, border=True)
 
 with col3:
-    st.metric('**Fiduciary Call Cost**', f'${F_C:.2f}')
+    st.metric('**Fiduciary Call Cost**', f'${F_C:.2f}', help='The total cost of buying a call and investing the "present value" of the strike price in a safe bond')
 
 with col4:
-    st.metric('**Protective Put Cost**', f'${P_C:.2f}')
+    st.metric('**Protective Put Cost**', f'${P_C:.2f}', help='The total cost of buying the actual stock and a put option for insurance.')
 
 with col5:
-    st.metric('**Arbitrage Gap**', f'${gap:.2f}')
+    st.metric('**Arbitrage Gap**', f'${gap:.2f}', help='The price difference between the two portfolios. In a perfect market, this should be zero.')
 
 
 

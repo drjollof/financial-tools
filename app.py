@@ -92,7 +92,7 @@ mbs_page = st.Page(
 
 credit_page = st.Page(
     page= 'pages/credit_risk.py',
-    title= 'Credit Risk Engine'
+    title= 'Credit Risk'
 )
 
 leverage_page = st.Page(

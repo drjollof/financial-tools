@@ -16,13 +16,19 @@ def price_floor(L,S,F, margin):
     return total,target, profit
 
 
-st.header('Leverage and Development Lab')
+st.header('Leverage and Development')
+
+st.markdown("""
+*Calculate a homeowner's net equity and leverage multiplier, or determine a developer's absolute break-even sale price based on land, hard, and soft costs.*
+""")
+
 st.divider()
  
 col1, col2 = st.columns(2,  border=True)
 
 with col1:
     st.subheader('Homeowner Equity')
+    st.divider()
     asset = st.number_input('**Total Asset Value ($)**',
                             value= 500000,
                             format='%d',
@@ -55,6 +61,7 @@ with col1:
 
 with col2:
     st.subheader('Developer Price Floor')
+    st.divider()
     land = st.number_input('Land Costs ($)',
                     value=40000,
                     format='%d',

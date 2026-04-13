@@ -80,18 +80,20 @@ col1, col2, col3 = st.columns(3, border=True)
 
 with col1:
     st.subheader('Assets')
-    asset_price = st.number_input('**Stock Price ($)**')
-    s_p = st.number_input('**Strike Price ($)**')
+    asset_price = st.number_input('**Stock Price ($)**',
+                                  help='The current market price of the asset')
+    s_p = st.number_input('**Strike Price ($)**',
+                          help='The pre-agreed price at which you can exercise your right to buy or sell regardless of market fluctuations')
 
 
 with col2:
     st.subheader('Contract Type')
-    op_type = st.selectbox('**Option Type**', options=['Call', 'Put'])
-    pos = st.selectbox('**Position**', ['Long', 'Short'])
+    op_type = st.selectbox('**Option Type**', options=['Call', 'Put'], help='Select Call if you want the right to buy the asset, or Put if you want the right to sell it.')
+    pos = st.selectbox('**Position**', ['Long', 'Short'], help='Choose Long if you are the buyer (limited risk) or Short if you are the seller/writer (potentially high risk).')
 
 with col3:
     st.subheader('Premium Paid')
-    premium = st.number_input('**Premium ($)**')
+    premium = st.number_input('**Premium ($)**', help='The "entry fee" or market price you pay per share to own this contract.')
 
 container = st.container(border=True)
 
@@ -112,20 +114,20 @@ col5,col6,col7,col8 = st.columns(4, border=True)
 
 
 with col5:
-    st.metric('**Intrinsic Value**', f'${iv:.2f}')
+    st.metric('**Intrinsic Value**', f'${iv:.2f}', help='The immediate "cash value" of the option if you used it right now')
 
 with col6:
-    st.metric('**Breakeven Point**', f'${bp:.2f}')
+    st.metric('**Breakeven Point**', f'${bp:.2f}', help='The stock price at which your profit exactly covers the cost of the premium.')
 
 with col7:
-    st.metric('**Net P/L**', f'${net:.2f}')
+    st.metric('**Net P/L**', f'${net:.2f}', help='Total profit or loss after subtracting the premium paid from the payoff')
 
 with col8:
     if isinstance(mrv, str):
-        st.metric('**Max Risk**', f'{mrv}')
+        st.metric('**Max Risk**', f'{mrv}', help='The absolute most you can lose on this trade (for buyers, this is just the premium)')
         st.text(rl)
     else:
-        st.metric('**Max Risk**', f'${mrv:.1f}')
+        st.metric('**Max Risk**', f'${mrv:.1f}' , help='The absolute most you can lose on this trade (for buyers, this is just the premium)')
         st.text(rl)
 
 
