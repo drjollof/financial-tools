@@ -52,16 +52,17 @@ def plot_merton_model(asset_value, debt_value, volatility, time_to_expiry):
 col1, col2 = st.columns(2, border=True)
 
 with col1:
-    a_v = st.number_input('**Home/Asset Value ($)**', value=0)
-    d_v = st.number_input('**Mortgage/Debt Value ($)**', value = 0)
+    a_v = st.number_input('**Home/Asset Value ($)**', value=0, help='The total current market value of the property or the company assets')
+    d_v = st.number_input('**Mortgage/Debt Value ($)**', value = 0, help='The total liabilities or loan amount owed to the lender (acts as the "Strike Price").')
     
 
 with col2:
-    t = st.number_input('**Time to Expiry (years)**', value= 0)
+    t = st.number_input('**Time to Expiry (years)**', value= 0, help='The number of years until the loan matures or must be refinanced')
     vol = st.slider('**Volatility (%)**', min_value=0.0, 
                     max_value=50.0,
                     value=20.0,
-                    step=1.0)
+                    step=1.0,
+                    help='The measure of how much the asset value "swings." Higher volatility increases the "Right to Default"')
 
 container = st.container(border=True)
 container.write('**Merton Model Chart (Asset Value vs. Debt)**')
@@ -79,15 +80,15 @@ col3, col4, col5 = st.columns(3, border=True)
 
 E_V , O_V , D_D = get_metrics(a_v, d_v, vol)
 with col3:
-    st.metric('**Equity Value (Call)**', f'${E_V :.0f}')
+    st.metric('**Equity Value (Call)**', f'${E_V :.0f}', help="The value of the owner's stake, treated as a call option on the asset's value.")
 
 
 with col4:
-    st.metric('**Right to Default (Put)**', f'{O_V :.0f}')
+    st.metric('**Right to Default (Put)**', f'{O_V :.0f}', help='The value of the borrower ability to walk away from a non-recourse loan if the asset value crashes.')
              
 
 with col5:
-    st.metric('**Distance to Default**', f'{D_D :.2f}')
+    st.metric('**Distance to Default**', f'{D_D :.2f}', help='A safety score showing how many standard deviations the asset value is from the debt floor.')
 
 container = st.container(border=True)
 
@@ -97,22 +98,7 @@ else:
     container.success('**SAFE**')
 
 
-glossary_data = {
-    "Term": ["Asset Value", "Debt Value", "Equity", "Right to Default", "Volatility", "Default Zone"],
-    "Derivative Concept": ["Underlying", "Strike Price", "Call Option", "Put Option", "Uncertainty", "ITM (Put)"],
-    "Real-World Meaning": [
-        "Market price of the property",
-        "Total mortgage owed",
-        "Your ownership stake (max(A-D, 0))",
-        "The right to walk away from a bad loan",
-        "Frequency of price swings",
-        "When the house is 'underwater'"
-    ]
-}
 
-st.divider()
-st.subheader("Merton Model Glossary")
-st.table(pd.DataFrame(glossary_data))
 
 
 

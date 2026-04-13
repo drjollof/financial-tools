@@ -20,7 +20,13 @@ def get_ratios(sp,eps,bv,gr):
 
     return P_E, P_B, PEG
 
-st.header('Equity Research')
+st.title('Equity Research')
+
+st.markdown("""
+*Evaluate a company's intrinsic value based on its core financial health.
+             Use P/E and P/B ratios to assess current market pricing, and apply the PEG ratio to identify undervalued stocks relative to their expected future growth.*
+""")
+st.divider()
 
 col1, col2 = st.columns(2, border=True)
 
