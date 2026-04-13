@@ -8,7 +8,7 @@ def plot_payoff(s_current, strike, premium, option_type, position):
     lower_bound = min(strike, s_current) * 0.5
     upper_bound = max(strike, s_current) * 1.2
     s_t = np.linspace(lower_bound, upper_bound, 100)
-    #s_t = np.linspace(strike * 0.5, strike * 1.5, 100)
+    
     
     if option_type == "Call":
         payoff = np.maximum(s_t - strike, 0)
